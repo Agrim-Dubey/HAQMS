@@ -1,3 +1,37 @@
 {"timestamp":"00:00:00.664","source":"Server","level":"LOG","message":""}
 {"timestamp":"00:00:17.236","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
 {"timestamp":"00:02:14.605","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:22.387","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:22.391","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:22.393","source":"Server","level":"LOG","message":"✓ Compiled in 445ms"}
+{"timestamp":"03:33:23.367","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:23.380","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:36.289","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:36.291","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:36.311","source":"Server","level":"LOG","message":"✓ Compiled in 35ms"}
+{"timestamp":"03:33:37.048","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:37.058","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:51.063","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:51.064","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:51.108","source":"Server","level":"LOG","message":"✓ Compiled in 35ms"}
+{"timestamp":"03:33:51.147","source":"Server","level":"ERROR","message":"⨯ ReferenceError: API_BASE_URL is not defined"}
+{"timestamp":"03:33:51.202","source":"Server","level":"ERROR","message":"⨯ ReferenceError: API_BASE_URL is not defined"}
+{"timestamp":"03:33:51.262","source":"Server","level":"ERROR","message":"⨯ ReferenceError: API_BASE_URL is not defined"}
+{"timestamp":"03:33:51.655","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:51.679","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:52.079","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload due to a runtime error."}
+{"timestamp":"03:33:52.080","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:52.080","source":"Browser","level":"ERROR","message":"uncaughtError: ReferenceError: API_BASE_URL is not defined"}
+{"timestamp":"03:33:52.081","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload due to a runtime error."}
+{"timestamp":"03:33:52.081","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload due to a runtime error."}
+{"timestamp":"03:33:52.081","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:33:52.081","source":"Browser","level":"ERROR","message":"uncaughtError: ReferenceError: API_BASE_URL is not defined"}
+{"timestamp":"03:33:52.082","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload due to a runtime error."}
+{"timestamp":"03:33:52.132","source":"Server","level":"LOG","message":"✓ Compiled in 38ms"}
+{"timestamp":"03:33:52.670","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:33:52.681","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:34:57.113","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:34:57.114","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./frontend/src/context/AuthContext.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
+{"timestamp":"03:34:57.132","source":"Server","level":"LOG","message":"✓ Compiled in 23ms"}
+{"timestamp":"03:34:57.963","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"03:34:57.974","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
