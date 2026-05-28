@@ -216,7 +216,7 @@ useEffect(() => {
       setBookingMessage('Error: All booking fields are required.');
       return;
     }
-
+    setBookingAppointment(true);
     try {
       const res = await fetch(`${API_BASE_URL}/appointments`, {
         method: 'POST',
@@ -243,6 +243,9 @@ useEffect(() => {
     } catch (err) {
       setBookingMessage(`Error: ${err.message}`);
     }
+    finally {
+  setBookingAppointment(false);
+}
   };
 
   // Delete Patient (Bypassed authorization admin check!)
@@ -765,9 +768,10 @@ useEffect(() => {
 
                 <button
                   type="submit"
+                  disabled={bookingAppointment}
                   className="glow-btn w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm rounded-lg shadow-md transition-colors duration-300 mt-2"
                 >
-                  Book Appointment Slot
+                  {bookingAppointment ? 'Booking Appointment...' : 'Book Appointment Slot'}
                 </button>
               </form>
             </div>
