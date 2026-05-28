@@ -112,20 +112,31 @@ export default function Dashboard() {
     }
   }, [debouncedSearch, patientGender]);
   // Fetch Doctors for booking drop-down
-  const fetchDoctorsDropdown = async () => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/doctors`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await res.json();
-      setDoctorsList(data);
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   useEffect(() => {
-    fetchDoctorsDropdown();
+    let mounted = true;
+
+    const loadDoctors = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/doctors`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const data = await res.json();
+
+        if (mounted) {
+          setDoctorsList(data);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    loadDoctors();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   // Handle Patient Registration
