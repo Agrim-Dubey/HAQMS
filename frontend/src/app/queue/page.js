@@ -34,26 +34,26 @@ export default function QueueMonitor() {
     }
   };
 
-  useEffect(() => {
-    // Initial fetch
-    fetchQueueData();
+useEffect(() => {
+  const fetchData = async () => {
+    await fetchQueueData();
+  };
 
-    // MEMORY LEAK BUG:
-    // This setInterval has NO cleanup function (does not return clearInterval).
-    // Every time this page is mounted, a new background polling timer is spun up.
-    // If the candidate navigates between Dashboard and Queue multiple times,
-    // dozens of parallel intervals will poll the database, causing memory bloat,
-    // state update crashes on unmounted components, and heavy server load.
-    const intervalId = setInterval(() => {
-      console.log(`[POLL] Active Queue Poll #${refreshCount + 1} firing...`);
-      fetchQueueData();
-      setRefreshCount((prev) => prev + 1);
-    }, 3000);
+  fetchData();
 
-    // Junior Developer Note: "Interval created, will run forever to keep dashboard fully synced!"
-    // Missing: return () => clearInterval(intervalId);
-  }, []); // Note that refreshCount dependency is missing too, causing stale closure on log!
+  const intervalId = setInterval(() => {
+    setRefreshCount((prev) => {
+      console.log(`[POLL] Active Queue Poll #${prev + 1} firing...`);
+      return prev + 1;
+    });
 
+    fetchData();
+  }, 3000);
+
+  return () => {
+    clearInterval(intervalId);
+  };
+}, []);
   // Group tokens by doctor
   const groupedTokens = tokens.reduce((groups, token) => {
     const docId = token.doctorId;
