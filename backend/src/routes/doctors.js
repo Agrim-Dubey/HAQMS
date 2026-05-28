@@ -49,24 +49,30 @@ router.get('/stats', authenticate, async (req, res) => {
   try {
     const start = Date.now();
 
-    // Independent database calls are run sequentially with await, stalling the event loop
-    const totalDoctors = await prisma.doctor.count();
-    
-    const surgeonsCount = await prisma.doctor.count({
-      where: { department: 'Surgery' },
-    });
+    const [
+      totalDoctors,
+      surgeonsCount,
+      averageFee,
+      highestExperience,
+    ] = await Promise.all([
+      prisma.doctor.count(),
 
-    const averageFee = await prisma.doctor.aggregate({
-      _avg: {
-        consultationFee: true,
-      },
-    });
+      prisma.doctor.count({
+        where: { department: 'Surgery' },
+      }),
 
-    const highestExperience = await prisma.doctor.aggregate({
-      _max: {
-        experience: true,
-      },
-    });
+      prisma.doctor.aggregate({
+        _avg: {
+          consultationFee: true,
+        },
+      }),
+
+      prisma.doctor.aggregate({
+        _max: {
+          experience: true,
+        },
+      }),
+    ]);
 
     const durationMs = Date.now() - start;
 
@@ -80,11 +86,14 @@ router.get('/stats', authenticate, async (req, res) => {
       },
       debugInfo: {
         executionTimeMs: durationMs,
-        notes: 'Loaded sequentially for safety. Optimization needed.'
-      }
+      },
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Doctor stats error:', error);
+
+    res.status(500).json({
+      error: 'Failed to load doctor stats',
+    });
   }
 });
 
