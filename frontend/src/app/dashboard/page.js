@@ -16,11 +16,11 @@ export default function Dashboard() {
   const router = useRouter();
 
   // Navigation Guard
-  useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    }
-  }, [user]);
+useEffect(() => {
+  if (!user) {
+    router.push('/login');
+  }
+}, [user, router]);
 
   if (!user) return null;
 
