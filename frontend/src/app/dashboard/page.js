@@ -301,10 +301,13 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    if (user.role === 'DOCTOR' && doctorsList.length > 0) {
-      fetchDoctorWorklist();
-    }
-  }, [doctorsList]);
+  if (
+    user?.role === 'DOCTOR' &&
+    doctorsList.length > 0
+  ) {
+    fetchDoctorWorklist();
+  }
+}, [user?.role, doctorsList.length]);
 
   // Update token status (WAITING -> CALLING -> COMPLETED / SKIPPED)
   const handleUpdateQueueStatus = async (tokenId, newStatus) => {
