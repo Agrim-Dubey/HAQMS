@@ -54,6 +54,9 @@ useEffect(() => {
   const [bookingReason, setBookingReason] = useState('');
   const [bookingMessage, setBookingMessage] = useState('');
   const [checkinMessage, setCheckinMessage] = useState('');
+  const [registeringPatient, setRegisteringPatient] = useState(false);
+  const [bookingAppointment, setBookingAppointment] = useState(false);
+  const [checkingIn, setCheckingIn] = useState(false);
 
   // ==========================================
   // STATE FOR DOCTOR WORKFLOWS
@@ -163,6 +166,8 @@ useEffect(() => {
         return;
       }
 
+      setRegisteringPatient(true);
+
     try {
       const res = await fetch(`${API_BASE_URL}/patients`, {
         method: 'POST',
@@ -197,6 +202,9 @@ useEffect(() => {
     } catch (err) {
       setRegMessage(`Error: ${err.message}`);
     }
+    finally {
+  setRegisteringPatient(false);
+}
   };
 
   // Handle Appointment Booking
@@ -672,9 +680,10 @@ useEffect(() => {
 
                   <button
                     type="submit"
+                    disabled={registeringPatient}
                     className="glow-btn w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm rounded-lg shadow-md transition-colors duration-300 mt-2"
                   >
-                    Register Patient Record
+                    {registeringPatient ? 'Registering...' : 'Register Patient Record'}
                   </button>
                 </form>
               </div>
