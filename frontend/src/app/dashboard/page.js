@@ -269,28 +269,37 @@ useEffect(() => {
   };
 
   // Queue Token Checkin (Race condition API!)
-  const handleQueueCheckin = async (patientId, doctorId, appointmentId = null) => {
-    setCheckinMessage('');
-    try {
-      const res = await fetch(`${API_BASE_URL}/queue/checkin`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ patientId, doctorId, appointmentId })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setCheckinMessage(`Checked in! Generated Token #${data.token.tokenNumber}`);
-        if (user.role === 'DOCTOR') fetchDoctorWorklist();
-      } else {
-        setCheckinMessage(`Error check-in: ${data.error}`);
+const handleQueueCheckin = async (patientId, doctorId, appointmentId = null) => {
+  setCheckinMessage('');
+  setCheckingIn(true);
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/queue/checkin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ patientId, doctorId, appointmentId })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setCheckinMessage(`Checked in! Generated Token #${data.token.tokenNumber}`);
+
+      if (user.role === 'DOCTOR') {
+        fetchDoctorWorklist();
       }
-    } catch (err) {
-      setCheckinMessage(`Error: ${err.message}`);
+    } else {
+      setCheckinMessage(`Error check-in: ${data.error}`);
     }
-  };
+  } catch (err) {
+    setCheckinMessage(`Error: ${err.message}`);
+  } finally {
+    setCheckingIn(false);
+  }
+};
 
   // ==========================================
   // DOCTOR WORKFLOW FUNCTIONS
@@ -820,6 +829,7 @@ useEffect(() => {
                   </div>
 
                   <button
+                    disabled={checkingIn}
                     onClick={() => {
                       const pId = document.getElementById('walkin-patient').value;
                       const dId = document.getElementById('walkin-doctor').value;
@@ -829,9 +839,9 @@ useEffect(() => {
                       }
                       handleQueueCheckin(pId, dId);
                     }}
-                    className="glow-btn w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white dark:bg-teal-500 dark:text-slate-950 dark:hover:bg-teal-400 font-extrabold text-sm rounded-lg shadow-md transition-colors duration-300 mt-2"
+                    className="glow-btn w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white dark:bg-teal-500 dark:text-slate-950 dark:hover:bg-teal-400 font-extrabold text-sm rounded-lg shadow-md transition-colors duration-300 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Generate Live Token
+                    {checkingIn ? 'Generating Token...' : 'Generate Live Token'}
                   </button>
                 </div>
               </div>
