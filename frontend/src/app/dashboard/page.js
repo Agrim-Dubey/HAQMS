@@ -78,6 +78,7 @@ useEffect(() => {
   
   // Fetch Patients List
   const fetchPatients = async (page = 1) => {
+    if (!token) return;
     setPatientsLoading(true);
     try {
       // Inefficient memory pagination called from client
@@ -305,6 +306,7 @@ const handleQueueCheckin = async (patientId, doctorId, appointmentId = null) => 
   // DOCTOR WORKFLOW FUNCTIONS
   // ==========================================
   const fetchDoctorWorklist = async () => {
+    if (!token) return;
     if (user.role !== 'DOCTOR') return;
     try {
       // Find matching doctor from doctors dropdown using user ID link
@@ -385,6 +387,7 @@ const handleQueueCheckin = async (patientId, doctorId, appointmentId = null) => 
   
   // Slow report generator fetch
   const generateSystemReport = async () => {
+    if (!token) return;
     setAdminReportLoading(true);
     try {
       // Calls slow nested aggregation endpoint
@@ -404,6 +407,7 @@ const handleQueueCheckin = async (patientId, doctorId, appointmentId = null) => 
 
   // Search Doctors (SQL Injection vulnerable API!)
   const searchPhysiciansAdmin = async () => {
+    if (!token) return;
     try {
       const res = await fetch(`${API_BASE_URL}/doctors?search=${adminSearchQuery}`, {
         headers: { 'Authorization': `Bearer ${token}` }
