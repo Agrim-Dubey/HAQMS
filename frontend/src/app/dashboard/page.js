@@ -32,6 +32,7 @@ export default function Dashboard() {
   const [patients, setPatients] = useState([]);
   const [patientsLoading, setPatientsLoading] = useState(false);
   const [patientSearch, setPatientSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [patientGender, setPatientGender] = useState('All');
   const [patientsPagination, setPatientsPagination] = useState({ page: 1, totalPages: 1 });
   
@@ -76,7 +77,7 @@ export default function Dashboard() {
     setPatientsLoading(true);
     try {
       // Inefficient memory pagination called from client
-      const res = await fetch(`${API_BASE_URL}/patients?page=${page}&limit=5&search=${patientSearch}&gender=${patientGender}`, {
+      const res = await fetch(`${API_BASE_URL}/patients?page=${page}&limit=5&search=${debouncedSearch}&gender=${patientGender}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -97,11 +98,18 @@ export default function Dashboard() {
 
   // Trigger Patient List Fetch (Every keystroke trigger re-renders parent! - Performance bug)
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(patientSearch);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [patientSearch]);
+
+  useEffect(() => {
     if (user.role === 'RECEPTIONIST' || user.role === 'ADMIN') {
       fetchPatients(1);
     }
-  }, [patientSearch, patientGender]);
-
+  }, [debouncedSearch, patientGender]);
   // Fetch Doctors for booking drop-down
   const fetchDoctorsDropdown = async () => {
     try {
