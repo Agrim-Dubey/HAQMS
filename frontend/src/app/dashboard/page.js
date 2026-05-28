@@ -147,9 +147,21 @@ useEffect(() => {
     // INCONSISTENT VALIDATION: Receptionist form doesn't validate telephone structure on client, 
     // leading to database pollution (e.g. text telephone values)
     if (!regName || !regPhone || !regAge) {
-      setRegMessage('Error: Name, Age and Phone number are required.');
-      return;
-    }
+        setRegMessage('Error: Name, Age and Phone number are required.');
+        return;
+      }
+
+      const phoneRegex = /^[0-9+\-\s()]{7,15}$/;
+
+      if (!phoneRegex.test(regPhone)) {
+        setRegMessage('Error: Invalid phone number format.');
+        return;
+      }
+
+      if (Number(regAge) <= 0) {
+        setRegMessage('Error: Age must be greater than zero.');
+        return;
+      }
 
     try {
       const res = await fetch(`${API_BASE_URL}/patients`, {
